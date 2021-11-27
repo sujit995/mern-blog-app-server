@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 require('dotenv').config();
 
 const users = require('./routes/api/users');
+const articles = require('./routes/api/articles');
 const { checkToken } = require('./middleware/auth');
 
 const mongoUri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.hm4hs.mongodb.net/mern-blog-app?retryWrites=true&w=majority`
@@ -18,7 +19,7 @@ mongoose.connect(mongoUri, {
 app.use(bodyParser.json())
 app.use(checkToken)
 app.use("/api/users", users)
-
+app.use("/api/articles", articles)
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
